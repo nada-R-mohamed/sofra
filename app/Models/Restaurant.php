@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Restaurant extends Model 
+class Restaurant extends Model
 {
 
+    use HasApiTokens, Notifiable;
     protected $table = 'restaurants';
     public $timestamps = true;
     protected $fillable = array('name', 'email', 'password', 'region_id', 'phone', 'minimum_order', 'delivery_cost', 'contact_phone', 'whatsapp', 'image', 'status', 'device_name');

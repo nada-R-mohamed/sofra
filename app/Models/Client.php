@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Client extends Model 
+class Client extends Model
 {
 
+    use HasApiTokens, Notifiable;
     protected $table = 'clients';
     public $timestamps = true;
     protected $fillable = array('region_id', 'name', 'email', 'phone', 'password', 'device_name');
