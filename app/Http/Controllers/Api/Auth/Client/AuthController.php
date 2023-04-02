@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Client;
+namespace App\Http\Controllers\Api\Auth\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Client\Auth\LoginRequest;
@@ -22,6 +22,7 @@ class AuthController extends Controller
     {
 
         try{
+
             $data = $request->except('password');
             $data['password'] = Hash::make($request->password);
             $client = Client::create($data);

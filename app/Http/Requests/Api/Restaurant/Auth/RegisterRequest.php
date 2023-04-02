@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Client\Auth;
+namespace App\Http\Requests\Api\Restaurant\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,10 +23,16 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:3|max:100',
-            'email' =>'required|email|unique:clients,email',
-            'phone' => ['required','regex:/^01[0125][0-9]{8}$/'],
+            'email' =>'required|email|unique:restaurants,email',
+            'phone' => ['required','regex:/^01[0125][0-9]{8}$/',],
+            'minimum_order' => 'required|',
+            'delivery_cost' => '',
+            'whatsapp' => 'required',
+            'image' => 'required',
+            'status' => 'required',
+            'contact_phone' => ['required','regex:/^01[0125][0-9]{8}$/'],
             'password' => 'required|min:6|confirmed',
-            'password_confirmation' => 'required|min:6',
+            'password_confirmation' => 'required',
             'region_id' => 'required|integer|exists:regions,id',
             'device_name' => 'required|string'
         ];

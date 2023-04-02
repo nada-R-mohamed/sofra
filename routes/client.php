@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\Client\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Auth\Client\AuthController;
 use Illuminate\Support\Facades\Route;
 
 
-    Route::post('register',[AuthController::class,'register']);
+Route::post('register',[AuthController::class,'register']);
     Route::post('login',[AuthController::class,'login']);
     Route::post('reset-password',[AuthController::class,'resetPassword']);
     Route::post('new-password',[AuthController::class,'newPassword']);

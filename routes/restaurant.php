@@ -1,4 +1,14 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Auth\Restaurant\AuthController;
 use Illuminate\Support\Facades\Route;
+
+Route::post('register',[AuthController::class,'register']);
+Route::post('login',[AuthController::class,'login']);
+Route::post('reset-password',[AuthController::class,'resetPassword']);
+Route::post('new-password',[AuthController::class,'newPassword']);
+
+Route::middleware('auth')->group(function () {
+    Route::post('logout-current-token', [AuthController::class, 'logoutCurrentToken']);
+    Route::post('logout-all-tokens', [AuthController::class, 'logoutAllTokens']);
+});
