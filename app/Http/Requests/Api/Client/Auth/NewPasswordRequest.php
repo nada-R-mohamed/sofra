@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Restaurant\Auth;
+namespace App\Http\Requests\Api\Client\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class NewPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,9 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' =>'required|email|unique:restaurants,email',
-            'password' => 'required','string','min:6',
-            'device_name' => 'required','string'
+            'email' =>'required|email|exists:clients,email',
+            'pin_code' =>'required|string|exists:clients,pin_code',
+            'password' =>'required|string|confirmed|min:6',
         ];
     }
 }

@@ -25,15 +25,16 @@ class RegisterRequest extends FormRequest
             'name' => 'required|string|min:3|max:100',
             'email' =>'required|email|unique:restaurants,email',
             'phone' => ['required','regex:/^01[0125][0-9]{8}$/',],
-            'minimum_order' => 'required|',
-            'delivery_cost' => '',
-            'whatsapp' => 'required',
-            'image' => 'required',
-            'status' => 'required',
+            'minimum_order' => 'required|numeric|between:0,9999.99',
+            'delivery_cost' => 'required|numeric|between:0,9999.99',
+            'whatsapp' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg"',
+            'status' => 'required|in:open,closed',
             'contact_phone' => ['required','regex:/^01[0125][0-9]{8}$/'],
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required',
             'region_id' => 'required|integer|exists:regions,id',
+            'category_id' => 'required|integer|exists:categories,id',
             'device_name' => 'required|string'
         ];
     }

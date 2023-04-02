@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api\Auth\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Client\Auth\LoginRequest;
+use App\Http\Requests\Api\Client\Auth\NewPasswordRequest;
 use App\Http\Requests\Api\Client\Auth\RegisterRequest;
+use App\Http\Requests\Api\Client\Auth\ResetPasswordRequest;
 use App\Mail\ResetPassword;
 use App\Models\Client;
 use App\Traits\ApiResponses;
@@ -59,15 +61,8 @@ class AuthController extends Controller
         return $this->responseSuccess('All Of Your Acceess Token has been destroyed successfully');
     }
 
-    public function resetPassword(Request $request) :JsonResponse
+    public function resetPassword(ResetPasswordRequest $request) :JsonResponse
     {
-        // validate email
-        $validator = Validator::make($request->all(),[
-            'email' =>'required|email|exists:clients,email',
-        ]);
-        if ($validator->fails()) {
-            return $this->responseError([$validator->errors()]);
-        }
         // get client by email
         $client = Client::where('email',$request->email)->first();
         if(! $client){
@@ -84,18 +79,8 @@ class AuthController extends Controller
         return $this->responseSuccess("The Pin Code has ben send to your email");
     }
 
-    public function newPassword(Request $request) : JsonResponse
+    public function newPassword(NewPasswordRequest $request) : JsonResponse
     {
-        // validate [email - pin_code - password confirmed]
-        $validator = Validator::make($request->all(),[
-            'email' =>'required|email|exists:clients,email',
-            'pin_code' =>'required|string|exists:clients,pin_code',
-            'password' =>'required|string|confirmed|min:6',
-        ]);
-        if ($validator->fails()) {
-            return $this->responseError([$validator->errors()]);
-        }
-
         // get client by email
         $client = Client::where('email',$request->email)->first();
         if(! $client){
