@@ -13,12 +13,16 @@ class RestaurantController extends Controller
     use ApiResponses;
     public function getAllRestaurants(): JsonResponse
     {
-        $restaurants = Restaurant::paginate();
+        $restaurants = Restaurant::all();
         return $this->responseData(compact('restaurants'),'all restaurants');
     }
     public function getRestaurant($id): JsonResponse
     {
         $restaurant = Restaurant::find($id);
+        if(!$restaurant)
+        {
+            return $this->responseError(['Restaurant not found']);
+        }
         return $this->responseData(compact('restaurant'),'get the restaurant by id');
     }
     public function getMealsForRestaurant($restaurant_id): JsonResponse

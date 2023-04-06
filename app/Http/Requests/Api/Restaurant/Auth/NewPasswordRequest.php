@@ -11,7 +11,7 @@ class NewPasswordRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class NewPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "email" => 'required|email|exists:restaurants,email',
+            'pin_code' =>'required|string|exists:restaurants,pin_code',
+            'password' =>'required|string|confirmed|min:6',
+
         ];
     }
 }

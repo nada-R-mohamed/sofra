@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         }catch (\Exception $e){
 
-            return $this->responseError([$e->getMessage()],statusCode: 422);
+            return $this->responseError([$e->getMessage()]);
         }
 
     }

@@ -9,7 +9,7 @@ Route::post('register',[AuthController::class,'register']);
     Route::post('reset-password',[AuthController::class,'resetPassword']);
     Route::post('new-password',[AuthController::class,'newPassword']);
 
-    Route::middleware('auth')->group(function () {
+    Route::middleware('auth:sanctum')->group(function () {
         Route::post('logout-current-token', [AuthController::class, 'logoutCurrentToken']);
         Route::post('logout-all-tokens', [AuthController::class, 'logoutAllTokens']);
     });
