@@ -43,5 +43,18 @@ class Restaurant extends Model
     {
         return $this->hasMany('App\Models\Payment');
     }
+    public function scopeSearch($query, $request){
+        if ($request->has('name')) {
+            $query->where(function($query) use($request){
+                $query->where('name', 'like', '%'. $request->name. '%');
+            });
+        }
+
+        if ($request->has('region_id')) {
+            $query->where('region_id', $request->region_id);
+        }
+
+    }
+
 
 }

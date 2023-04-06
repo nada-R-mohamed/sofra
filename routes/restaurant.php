@@ -16,3 +16,4 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('all-restaurants',[RestaurantController::class,'getAllRestaurants']);
 Route::get('restaurant/{id}',[RestaurantController::class, 'getRestaurant']);
 Route::get('meals-restaurant/{id}',[RestaurantController::class,'getMealsForRestaurant']);
+Route::get('reviews-restaurant/{id}',[RestaurantController::class,'getReviewsForRestaurant']);

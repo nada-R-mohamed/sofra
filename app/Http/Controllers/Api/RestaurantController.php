@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 class RestaurantController extends Controller
 {
     use ApiResponses;
-    public function getAllRestaurants(): JsonResponse
+    public function getAllRestaurants(Request $request): JsonResponse
     {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::search($request)->paginate();
         return $this->responseData(compact('restaurants'),'all restaurants');
     }
     public function getRestaurant($id): JsonResponse
@@ -25,9 +25,9 @@ class RestaurantController extends Controller
         }
         return $this->responseData(compact('restaurant'),'get the restaurant by id');
     }
-    public function getMealsForRestaurant($restaurant_id): JsonResponse
+    public function getMealsForRestaurant($id): JsonResponse
     {
-        $restaurant = Restaurant::find($restaurant_id);
+        $restaurant = Restaurant::find($id);
 
         if (!$restaurant) {
             return $this->responseError(['message' => 'Restaurant not found'], 404);
@@ -37,9 +37,9 @@ class RestaurantController extends Controller
 
         return $this->responseData(compact('meals'),'all meals for this restaurant');
     }
-    public function getReviewsForRestaurant($restaurant_id): JsonResponse
+    public function getReviewsForRestaurant($id): JsonResponse
     {
-        $restaurant = Restaurant::find($restaurant_id);
+        $restaurant = Restaurant::find($id);
 
         if (!$restaurant) {
             return $this->responseError(['message' => 'Restaurant not found'], 404);
