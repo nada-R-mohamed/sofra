@@ -43,6 +43,10 @@ class Restaurant extends Model
     {
         return $this->hasMany('App\Models\Payment');
     }
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order');
+    }
     public function scopeSearch($query, $request){
         if ($request->has('name')) {
             $query->where(function($query) use($request){

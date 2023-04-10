@@ -16,6 +16,7 @@ class CreateClientsTable extends Migration {
 			$table->string('password');
 			$table->string('device_name');
 			$table->timestamps();
+			$table->string('pin_code')->nullable();
 		});
 	}
 

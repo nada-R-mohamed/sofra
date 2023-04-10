@@ -24,6 +24,16 @@ class CreateForeignKeys extends Migration {
 						->onUpdate('cascade');
 		});
 		Schema::table('orders', function(Blueprint $table) {
+			$table->foreign('client_id')->references('id')->on('clients')
+						->onDelete('restrict')
+						->onUpdate('restrict');
+		});
+		Schema::table('orders', function(Blueprint $table) {
+			$table->foreign('restaurant_id')->references('id')->on('restaurants')
+						->onDelete('restrict')
+						->onUpdate('restrict');
+		});
+		Schema::table('orders', function(Blueprint $table) {
 			$table->foreign('payment_method_id')->references('id')->on('payment_methods')
 						->onDelete('set null')
 						->onUpdate('cascade');
@@ -85,6 +95,12 @@ class CreateForeignKeys extends Migration {
 		});
 		Schema::table('meals', function(Blueprint $table) {
 			$table->dropForeign('meals_restaurant_id_foreign');
+		});
+		Schema::table('orders', function(Blueprint $table) {
+			$table->dropForeign('orders_client_id_foreign');
+		});
+		Schema::table('orders', function(Blueprint $table) {
+			$table->dropForeign('orders_restaurant_id_foreign');
 		});
 		Schema::table('orders', function(Blueprint $table) {
 			$table->dropForeign('orders_payment_method_id_foreign');

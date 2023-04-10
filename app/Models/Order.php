@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model 
+class Order extends Model
 {
 
     protected $table = 'orders';
@@ -25,5 +25,15 @@ class Order extends Model
     {
         return $this->morphMany('App\Models\Notification');
     }
+    public function client()
+    {
+        return $this->belongsTo('App\Models\Client');
+    }
+
+    public function restaurant()
+    {
+        return $this->belongsTo('App\Models\Restaurant');
+    }
+
 
 }

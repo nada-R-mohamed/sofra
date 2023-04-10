@@ -22,6 +22,7 @@ class CreateRestaurantsTable extends Migration {
 			$table->enum('status', array('open', 'closed'));
 			$table->string('device_name');
 			$table->timestamps();
+			$table->string('pin_code')->nullable();
 		});
 	}
 
